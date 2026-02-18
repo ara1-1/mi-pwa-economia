@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APP de Economía</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.png" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #f2f6ff;
+    }
+
+    header {
+      background: #1a4fa3;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.3rem;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: space-around;
+      background: #e3ecff;
+      padding: 10px;
+    }
+
+    .menu button {
+      padding: 10px 15px;
+      border: none;
+      background: #1a4fa3;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .menu button:hover {
+      background: #163f82;
+    }
+
+    .pantalla {
+      display: none;
+      padding: 20px;
+    }
+
+    .activa {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .boton-clase {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #1a4fa3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      margin: 5px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button.calc {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #1a4fa3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>APP de Economía – 3ro 1ra</header>
+
+<div class="menu">
+  <button onclick="mostrar('inicio')">Inicio</button>
+  <button onclick="mostrar('noticias')">Noticias</button>
+  <button onclick="mostrar('calculadora')">Calculadora</button>
+  <button onclick="mostrar('conversor')">Conversor</button>
+</div>
+
+<!-- PANTALLA INICIO -->
+<div id="inicio" class="pantalla activa">
+  <div class="card">
+    <h2>Bienvenido</h2>
+    <p>Seleccioná una opción del menú o elegí una clase.</p>
+    <img src="icon.png" width="120">
+
+    <button class="boton-clase" onclick="mostrar('clase1')">Clase 1</button>
+    <button class="boton-clase" onclick="mostrar('clase2')">Clase 2</button>
+    <button class="boton-clase" onclick="mostrar('clase3')">Clase 3</button>
+  </div>
+</div>
+
+<!-- PANTALLA NOTICIAS -->
+<div id="noticias" class="pantalla">
+  <div class="card">
+    <h2>Noticias económicas</h2>
+    <ul>
+      <li>El dólar sube ligeramente en mercados internacionales.</li>
+      <li>La inflación muestra señales de desaceleración.</li>
+      <li>El empleo crece en sectores tecnológicos.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PANTALLA CALCULADORA -->
+<div id="calculadora" class="pantalla">
+  <div class="card">
+    <h2>Calculadora</h2>
+    <input id="num1" type="number" placeholder="Número 1">
+    <input id="num2" type="number" placeholder="Número 2">
+    <button class="calc" onclick="calcular()">Calcular</button>
+    <p id="resultado"></p>
+  </div>
+</div>
+
+<!-- PANTALLA CONVERSOR -->
+<div id="conversor" class="pantalla">
+  <div class="card">
+    <h2>Conversor de moneda</h2>
+    <input id="pesos" type="number" placeholder="Pesos argentinos">
+    <button class="calc" onclick="convertir()">Convertir a USD</button>
+    <p id="usd"></p>
+  </div>
+</div>
+
+<!-- PANTALLA CLASE 1 -->
+<div id="clase1" class="pantalla">
+  <div class="card">
+    <h2>Clase 1 – Introducción a la Economía</h2>
+    <p>
+      La economía es la ciencia que estudia cómo las personas, empresas y gobiernos toman decisiones para usar recursos que son limitados. 
+      En esta clase veremos conceptos básicos como necesidades, bienes, servicios y recursos. 
+      También aprenderemos por qué la economía está presente en todas nuestras decisiones diarias.
+    </p>
+  </div>
+</div>
+
+<!-- PANTALLA CLASE 2 -->
+<div id="clase2" class="pantalla">
+  <div class="card">
+    <h2>Clase 2 – Oferta y Demanda</h2>
+    <p>
+      La oferta y la demanda son dos fuerzas fundamentales del mercado. 
+      La demanda representa lo que las personas quieren comprar, mientras que la oferta es lo que los productores están dispuestos a vender. 
+      Cuando ambas se encuentran, se forma el precio. 
+      En esta clase analizaremos ejemplos simples para entender cómo cambian los precios.
+    </p>
+  </div>
+</div>
+
+<!-- PANTALLA CLASE 3 -->
+<div id="clase3" class="pantalla">
+  <div class="card">
+    <h2>Clase 3 – Inflación y Precios</h2>
+    <p>
+      La inflación es el aumento generalizado de los precios a lo largo del tiempo. 
+      Esto significa que con la misma cantidad de dinero podemos comprar menos cosas. 
+      En esta clase veremos por qué ocurre la inflación, cómo afecta a las familias y qué herramientas existen para controlarla.
+    </p>
+  </div>
+</div>
+
+<script>
+  function mostrar(pantalla) {
+    document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+    document.getElementById(pantalla).classList.add('activa');
+  }
+
+  function calcular() {
+    let a = parseFloat(document.getElementById('num1').value);
+    let b = parseFloat(document.getElementById('num2').value);
+    if (!isNaN(a) && !isNaN(b)) {
+      document.getElementById('resultado').innerText =
+        "Suma: " + (a+b) +
+        " | Resta: " + (a-b) +
+        " | Multiplicación: " + (a*b) +
+        " | División: " + (b !== 0 ? (a/b) : "No se puede dividir por cero");
+    }
+  }
+
+  function convertir() {
+    let pesos = parseFloat(document.getElementById('pesos').value);
+    let dolar = 1000; 
+    if (!isNaN(pesos)) {
+      document.getElementById('usd').innerText =
+        "USD: " + (pesos / dolar).toFixed(2);
+    }
+  }
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+  }
+</script>
+
+</body>
+</html>
