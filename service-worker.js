@@ -1,7 +1,12 @@
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open("pwa-cache").then(cache => {
-      return cache.addAll(["/", "/index.html", "/icon.png"]);
+      return cache.addAll([
+        "/mi-pwa-economia/",
+        "/mi-pwa-economia/index.html",
+        "/mi-pwa-economia/manifest.json",
+        "/mi-pwa-economia/icon.png"
+      ]);
     })
   );
 });
@@ -13,3 +18,5 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
+
